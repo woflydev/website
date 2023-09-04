@@ -1,39 +1,69 @@
+const withPlugins = require("next-compose-plugins");
+const SCSS = require("@zeit/next-sass");
+const MdxEnhanced = require("next-mdx-enhanced");
+const fs = require("fs");
+const path = require("path");
+const withPWA = require("next-pwa");
+const mdxOptions = require("./lib/mdxOptions");
+
 module.exports = {
-  reactStrictMode: true,
-  trailingSlash: true,
-  pageExtensions: ['page.js', 'api.js'],
-  webpack(config, { isServer }) {
-    // Run custom scripts
-    if (isServer) {
-      require('./scripts/generate-sitemap');
-      require('./scripts/draco');
+  future: { webpack5: true },
+  ...withPlugins(
+    [
+      [SCSS],
+      [process.env.NODE_ENV === "development" ? MdxEnhanced(mdxOptions) : []],
+      [
+        withPWA,
+        {
+          pwa: { dest: "public", disable: process.env.NODE_ENV === "development", register: true, sw: "service-worker.js" },
+        },
+      ],
+    ],
+    {
+      webpack(config, { isServer }) {
+        config.module.rules.push(
+          {
+            test: /\.(png|eot|otf|ttf|woff|woff2)$/,
+            use: {
+              loader: "url-loader",
+            },
+          },
+          {
+            loader: "sass-loader",
+            test: /.scss$/,
+            options: {
+              sassOptions: {
+                outputStyle: "expanded",
+                sourceMap: true,
+              },
+            },
+          },
+          fs.readdirSync(path.join(process.cwd(), "styles")).filter(file => file.match(/^_.*\.scss$/)).length > 0
+            ? {
+                enforce: "pre",
+                test: /.scss$/,
+                loader: "sass-resources-loader",
+                options: {
+                  resources: fs
+                    .readdirSync(path.join(process.cwd(), "styles"))
+                    .filter(file => file.match(/^_.*\.scss$/))
+                    .map(file => `./styles/${file}`),
+                },
+              }
+            : {}
+        );
+
+        if (isServer) {
+          require("./lib/createSitemap");
+        }
+
+        config.resolve.extensions = [".ts", ".js", ".jsx", ".tsx", ".svg", ".scss"];
+        return config;
+      },
     }
+  ),
+};
 
-    // Import `svg` files as React components
-    config.module.rules.push({
-      test: /\.svg$/,
-      resourceQuery: { not: [/url/] },
-      use: [{ loader: '@svgr/webpack', options: { svgo: false } }],
-    });
-
-    // Import videos, models, hdrs, and fonts
-    config.module.rules.push({
-      test: /\.(mp4|hdr|glb|woff|woff2)$/i,
-      type: 'asset/resource',
-    });
-
-    // Force url import with `?url`
-    config.module.rules.push({
-      resourceQuery: /url/,
-      type: 'asset/resource',
-    });
-
-    // Import `.glsl` shaders
-    config.module.rules.push({
-      test: /\.glsl$/,
-      type: 'asset/source',
-    });
-
-    return config;
-  },
+module.exports.env = {
+  BUTTONDOWN_API_KEY: process.env.BUTTONDOWN_API_KEY,
 };
