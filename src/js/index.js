@@ -3,7 +3,15 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import each from "lodash/each";
 import { copyText } from "./utils/index";
+import packageJson from '../../package.json'; // Adjust the path as needed
 // import Home from "./pages/home";
+
+const version = packageJson.version;
+const versionElement = document.getElementsByClassName('version_name');
+for (var i = 0; i < versionElement.length; i++) {
+  versionElement[i].textContent = `${version}`;
+}
+
 
 const toContactButtons = document.querySelectorAll(".contact-scroll");
 const footer = document.getElementById("js-footer");
@@ -68,7 +76,7 @@ export default class Home {
 
       setTimeout(() => {
         toCopyText.textContent = "Click To Copy";
-      }, 2000);
+      }, 500);
     });
   }
 

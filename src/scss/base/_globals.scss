@@ -80,3 +80,48 @@ html.has-scroll-dragging {
   cursor: -webkit-grabbing;
   cursor: grabbing;
 }
+
+/* custom bits */
+
+@mixin strikethrough {
+  position: relative;
+
+  &:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 50%;
+    height: 1px;
+    background: linear-gradient(to right, transparent 49%, #000 50%, transparent 51%);
+    transition: background 0.3s ease;
+  }
+}
+
+.strike {
+  position: relative;
+  color: #888;
+  transition: color 0.3s ease; 
+
+  &::before {
+    @include strikethrough;
+  }
+
+  &:hover {
+    color: #ff6600;
+    &::before {
+      background: linear-gradient(to right, transparent 49%, #ff6600 50%, transparent 51%);
+    }
+  }
+
+  &:not(:hover) {
+    color: #888;
+    &::before {
+      background: linear-gradient(to right, transparent 49%, #000 50%, transparent 51%);
+    }
+  }
+}
+
+.bold_custom {
+  font-weight: 700;
+}

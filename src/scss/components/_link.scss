@@ -43,7 +43,7 @@
       position: absolute;
       top: 100%;
       display: none;
-      font-family: $font-sauce;
+      //font-family: $font-sauce; // doesn't show with space
 
       @media (any-pointer: fine) {
         display: inline-block;
@@ -67,34 +67,35 @@
     position: relative;
     z-index: 1;
     overflow: hidden;
-
+  
     &__inner {
       display: flex;
       transform: translateY(-100%);
-      animation: infiniteArrow 1s infinite
-        cubic-bezier(0.175, 0.885, 0.32, 1.275);
-
+      animation: infiniteArrow 1s infinite cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  
       > span {
         /* white-space: nowrap; */
       }
     }
-
+  
     &__animated {
       /* white-space: nowrap; */
       position: absolute;
       top: 100%;
+      display: none; /* Initially hide this content */
+    }
+  
+    &:hover {
+      .c-link__animated {
+        display: block; /* Display this content on hover */
+      }
     }
   }
-
-  // @include media(">tablet") {
-  //   &:hover {
-  //     .c-link__inner {
-  //       transform: translateY(-100%);
-  //     }
-  //   }
-  // }
-
+  
   @keyframes infiniteArrow {
+    0% {
+      transform: translateY(-100%);
+    }
     100% {
       transform: translateY(0);
     }
