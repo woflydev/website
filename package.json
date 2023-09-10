@@ -6,7 +6,8 @@
   "scripts": {
     "win": "rmdir /s /q public .cache & parcel src/index.html -d public -p 3000",
     "mac": "rm -rf ./public && rm -rf ./.cache && parcel src/index.html -d public -p 3000",
-    "build": "parcel build src/index.html -d dist --public-url ./"
+    "bmac": "parcel build src/index.html -d dist --public-url ./ && firebase deploy",
+    "bwin": "parcel build src/index.html -d dist --public-url ./ & firebase deploy"
   },
   "keywords": [],
   "author": "",
