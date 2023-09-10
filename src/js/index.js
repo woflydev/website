@@ -12,7 +12,6 @@ for (var i = 0; i < versionElement.length; i++) {
   versionElement[i].textContent = `${version}`;
 }
 
-
 const toContactButtons = document.querySelectorAll(".contact-scroll");
 const footer = document.getElementById("js-footer");
 const scrollEl = document.querySelector("[data-scroll-container]");
