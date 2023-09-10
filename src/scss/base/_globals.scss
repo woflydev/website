@@ -83,6 +83,7 @@ html.has-scroll-dragging {
 
 /* custom bits */
 
+// for styled strikethroughs
 @mixin strikethrough {
   position: relative;
 
@@ -108,7 +109,7 @@ html.has-scroll-dragging {
   }
 
   &:hover {
-    color: #ff6600;
+    color: #b8b6b6;
     &::before {
       background: linear-gradient(to right, transparent 49%, #ff6600 50%, transparent 51%);
     }
@@ -124,4 +125,31 @@ html.has-scroll-dragging {
 
 .bold_custom {
   font-weight: 700;
+}
+
+// for colourful texts
+.random_gradient {
+  display: inline-block;
+  position: relative;
+
+  & {
+    background: linear-gradient(45deg, #5fd393, #42a5e7);
+    background-size: 200% 200%;
+    animation: gradientAnimation 7s ease-in-out infinite;
+    color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+  }
+
+  @keyframes gradientAnimation {
+    0% {
+      background-position: 0% 0%;
+    }
+    50% {
+      background-position: 100% 100%;
+    }
+    100% {
+      background-position: 0% 0%;
+    }
+  }
 }
