@@ -84,19 +84,17 @@ html.has-scroll-dragging {
 /* custom bits */
 
 // for styled strikethroughs
+// This mixin is intended to be used inside a ::before block.
+// It must not create another ::before to avoid selectors like `::before:before`.
 @mixin strikethrough {
-  position: relative;
-
-  &:before {
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 50%;
-    height: 1px;
-    background: linear-gradient(to right, transparent 49%, #000 50%, transparent 51%);
-    transition: background 0.3s ease;
-  }
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 50%;
+  height: 1px;
+  background: linear-gradient(to right, transparent 49%, #000 50%, transparent 51%);
+  transition: background 0.3s ease;
 }
 
 .strike {

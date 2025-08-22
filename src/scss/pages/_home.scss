@@ -707,11 +707,11 @@
 
     &__center {
       .footer__links {
+          align-items: center;
+
         @include media(">tablet") {
           display: flex;
         }
-
-        align-items: center;
 
         @include media("<=tablet") {
           margin-bottom: 4.8rem;

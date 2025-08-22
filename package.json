@@ -1,13 +1,10 @@
 {
   "name": "woflydev-profile",
   "version": "1.1.5",
-  "main": "app.js",
   "license": "MIT",
   "scripts": {
-    "win": "rmdir /s /q public .cache & parcel src/index.html -d public -p 3000",
-    "mac": "rm -rf ./public && rm -rf ./.cache && parcel src/index.html -d public -p 3000",
-    "bmac": "parcel build src/index.html -d dist --public-url ./",
-    "bwin": "parcel build src/index.html -d dist --public-url ./"
+    "start": "parcel src/index.html",
+    "build": "parcel build src/index.html"
   },
   "keywords": [],
   "author": "",
@@ -15,12 +12,15 @@
     "@babel/core": "^7.10.2",
     "@babel/plugin-transform-runtime": "^7.10.1",
     "@babel/runtime-corejs3": "^7.10.2",
-    "parcel-bundler": "^1.12.4",
-    "sass": "^1.35.1"
+    "@parcel/config-default": "^2.15.4",
+    "@parcel/transformer-sass": "2.15.4",
+    "parcel": "^2.15.4",
+    "sass": "^1.77.4"
   },
   "dependencies": {
     "gsap": "^3.7.0",
     "locomotive-scroll": "^4.1.1",
+    "lodash": "^4.17.21",
     "regenerator-runtime": "^0.13.7"
   }
 }

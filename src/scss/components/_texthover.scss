@@ -14,11 +14,11 @@
   }
 
   .project__link {
-    @include media("<=phone") {
-    }
     text-align: right;
     padding-right: 5rem;
     padding-bottom: 3.1rem;
+  @include media("<=phone") {
+  }
 
     @include media(">phone") {
       display: none;
@@ -153,13 +153,13 @@
   &__title {
     @extend %title-160;
     line-height: 1;
+    text-transform: uppercase;
+    padding-top: 6.4rem;
+    padding-bottom: 4.5rem;
 
     @include media(">tablet") {
       white-space: nowrap;
     }
-    text-transform: uppercase;
-    padding-top: 6.4rem;
-    padding-bottom: 4.5rem;
 
     @include media("<=phone") {
       padding-top: 3.2rem;
