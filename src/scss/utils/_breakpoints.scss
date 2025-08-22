@@ -107,7 +107,7 @@ $unit-intervals: (
   $query: "";
 
   @each $branch in $branches {
-    @if (str-length($query) != 0) {
+    @if (string.length($query) != 0) {
       $query: $query + ", ";
     }
 
@@ -194,7 +194,7 @@ $unit-intervals: (
   $is-width: true;
 
   @if (meta.type-of($expression) != "string") {
-    @warn 'Expression with type `#{type-of($expression)}` detected, string expected.';
+    @warn 'Expression with type `#{meta.type-of($expression)}` detected, string expected.';
   }
 
   // Separating the operator from the rest of the expression

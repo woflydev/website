@@ -1,3 +1,8 @@
+@use "../utils/variables" as *;
+@use "../utils/breakpoints" as *;
+@use "../shared/description" as *;
+@use "../shared/title" as *;
+@use "../shared/links" as *;
 %padding-home {
   padding-left: 4rem;
   padding-right: 4rem;
