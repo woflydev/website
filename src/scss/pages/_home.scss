@@ -221,7 +221,8 @@
       }
 
       &__scroll {
-        margin-top: auto;
+        //margin-top: auto;
+        margin-top: 2rem;
         color: $col-boulder;
         display: flex;
         justify-content: space-between;
@@ -478,7 +479,7 @@
 
   &__contact {
     @include media(">tablet") {
-      padding-top: 16rem;
+      padding-top: 1rem;
     }
 
     .line-wrapper {
